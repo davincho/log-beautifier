@@ -17,6 +17,7 @@ const Console = ({ output }: { output: string }) => {
       });
 
       const fitAddon = new FitAddon();
+
       terminal.loadAddon(fitAddon);
 
       terminal.open(nodeRef.current);
@@ -25,17 +26,11 @@ const Console = ({ output }: { output: string }) => {
     }
 
     if (output) {
-      const lines = output.split("\n");
-      console.log("HOW MUCH", lines.length);
-
-      for (const line of lines) {
-        terminalRef.current.writeln(line);
-      }
+      terminalRef.current?.write(output.replaceAll("\n", "\n\r"));
     }
 
     return () => {
       if (terminalRef.current) {
-        console.log("EXITING");
         terminalRef.current.clear();
         terminalRef.current.dispose();
         terminalRef.current = null;
@@ -43,7 +38,7 @@ const Console = ({ output }: { output: string }) => {
     };
   }, [output]);
 
-  return <Box overflowX="auto" overflowY="auto" ref={nodeRef} />;
+  return <Box height="100%" overflowX="auto" overflowY="auto" ref={nodeRef} />;
 };
 
 export default Console;
