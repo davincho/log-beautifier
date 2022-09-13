@@ -12,8 +12,7 @@ const Console = ({ output }: { output: string }) => {
   React.useEffect(() => {
     if (!terminalRef.current) {
       const terminal = new Terminal({
-        tabStopWidth: 1,
-        rendererType: "canvas",
+        scrollback: 100000,
       });
 
       const fitAddon = new FitAddon();
@@ -21,12 +20,14 @@ const Console = ({ output }: { output: string }) => {
       terminal.loadAddon(fitAddon);
 
       terminal.open(nodeRef.current);
+
       fitAddon.fit();
       terminalRef.current = terminal;
     }
 
     if (output) {
-      terminalRef.current?.write(output.replaceAll("\n", "\n\r"));
+      const prepOutput = output.replaceAll("\n", "\n\r");
+      terminalRef.current?.write(prepOutput);
     }
 
     return () => {
