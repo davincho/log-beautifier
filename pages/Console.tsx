@@ -6,7 +6,7 @@ import { Terminal } from "xterm";
 import "xterm/css/xterm.css";
 
 const Console = ({ output }: { output: string }) => {
-  const nodeRef = React.useRef<HTMLElement>();
+  const nodeRef = React.useRef<HTMLDivElement>(null);
   const terminalRef = React.useRef<Terminal>();
 
   React.useEffect(() => {
@@ -19,7 +19,9 @@ const Console = ({ output }: { output: string }) => {
 
       terminal.loadAddon(fitAddon);
 
-      terminal.open(nodeRef.current);
+      if (nodeRef.current) {
+        terminal.open(nodeRef.current);
+      }
 
       fitAddon.fit();
       terminalRef.current = terminal;
@@ -34,12 +36,20 @@ const Console = ({ output }: { output: string }) => {
       if (terminalRef.current) {
         terminalRef.current.clear();
         terminalRef.current.dispose();
-        terminalRef.current = null;
+        terminalRef.current = undefined;
       }
     };
   }, [output]);
 
-  return <Box height="100%" overflowX="auto" overflowY="auto" ref={nodeRef} />;
+  return (
+    <Box
+      as="div"
+      height="100%"
+      overflowX="auto"
+      overflowY="auto"
+      ref={nodeRef}
+    />
+  );
 };
 
 export default Console;
