@@ -1,6 +1,5 @@
 import { Box } from "@chakra-ui/react";
 import * as React from "react";
-import { FitAddon } from "xterm-addon-fit";
 
 import { Terminal } from "xterm";
 import "xterm/css/xterm.css";
@@ -10,27 +9,35 @@ const Console = ({ output }: { output: string }) => {
   const terminalRef = React.useRef<Terminal>();
 
   React.useEffect(() => {
-    if (!terminalRef.current) {
-      const terminal = new Terminal({
-        scrollback: 100000,
-      });
+    const initTerminal = async () => {
+      const { Terminal } = await import("xterm");
+      const { FitAddon } = await import("xterm-addon-fit");
+      const term = new Terminal();
+      // Add logic with `term`
 
-      const fitAddon = new FitAddon();
+      if (!terminalRef.current) {
+        const terminal = new Terminal({
+          scrollback: 100000,
+        });
 
-      terminal.loadAddon(fitAddon);
+        const fitAddon = new FitAddon();
 
-      if (nodeRef.current) {
-        terminal.open(nodeRef.current);
+        terminal.loadAddon(fitAddon);
+
+        if (nodeRef.current) {
+          terminal.open(nodeRef.current);
+        }
+
+        fitAddon.fit();
+        terminalRef.current = terminal;
       }
 
-      fitAddon.fit();
-      terminalRef.current = terminal;
-    }
-
-    if (output) {
-      const prepOutput = output.replaceAll("\n", "\n\r");
-      terminalRef.current?.write(prepOutput);
-    }
+      if (output) {
+        const prepOutput = output.replaceAll("\n", "\n\r");
+        terminalRef.current?.write(prepOutput);
+      }
+    };
+    initTerminal();
 
     return () => {
       if (terminalRef.current) {

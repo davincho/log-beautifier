@@ -2,16 +2,10 @@ import * as React from "react";
 
 import type { NextPage } from "next";
 import Head from "next/head";
-import { AnimatePresence, motion } from "framer-motion";
-
-import dynamic from "next/dynamic";
 
 import Container from "./Container";
 import AnimatedView from "./AnimatedView";
-
-const DynamicConsole = dynamic(() => import("./Console"), {
-  ssr: false,
-});
+import Console from "./Console";
 
 import { ChakraProvider, Textarea, Button, Box, Text } from "@chakra-ui/react";
 
@@ -73,7 +67,7 @@ const Home: NextPage = () => {
               </Button>
             }
           >
-            <DynamicConsole output={output} />
+            <Console output={output} />
           </Container>
         )}
       </AnimatedView>
