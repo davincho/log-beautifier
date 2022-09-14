@@ -1,4 +1,5 @@
-import { Box, Input, Button, Stack } from "@chakra-ui/react";
+import { Box, Input, Button, Stack, Tooltip } from "@chakra-ui/react";
+import { ArrowUpIcon, ArrowDownIcon } from "@chakra-ui/icons";
 import * as React from "react";
 
 import { Terminal } from "xterm";
@@ -17,6 +18,7 @@ const Console = ({ output }: { output: string }) => {
       // make NextJS fail when trying to build the app :sadpepe:
       const { Terminal } = await import("xterm");
       const { FitAddon } = await import("xterm-addon-fit");
+      const { WebglAddon } = await import("xterm-addon-webgl");
       const { SearchAddon } = await import("xterm-addon-search");
       const term = new Terminal();
       // Add logic with `term`
@@ -24,6 +26,11 @@ const Console = ({ output }: { output: string }) => {
       if (!terminalRef.current) {
         const terminal = new Terminal({
           scrollback: 100000,
+          minimumContrastRatio: 1,
+          theme: {
+            selection: "#FFFF54",
+            selectionForeground: "#000",
+          },
         });
 
         const fitAddon = new FitAddon();
@@ -34,6 +41,7 @@ const Console = ({ output }: { output: string }) => {
 
         if (nodeRef.current) {
           terminal.open(nodeRef.current);
+          terminal.loadAddon(new WebglAddon());
         }
 
         fitAddon.fit();
@@ -71,7 +79,8 @@ const Console = ({ output }: { output: string }) => {
         right="0"
         top="0"
         zIndex="4"
-        margin="1"
+        borderRadius="md"
+        margin="3"
         backgroundColor="rgba(240,240,240,0.4)"
         padding="2"
         backdropFilter="blur(8px)"
@@ -90,13 +99,49 @@ const Console = ({ output }: { output: string }) => {
           }}
         >
           <Stack direction="row">
+            <Tooltip label="Scroll to top">
+              <Button
+                onClick={() => {
+                  searchAddonRef.current?.clearDecorations();
+                  terminalRef.current?.scrollToTop();
+                }}
+              >
+                <ArrowUpIcon />
+              </Button>
+            </Tooltip>
+            <Tooltip label="Scroll to bottom">
+              <Button
+                onClick={() => {
+                  terminalRef.current?.scrollToBottom();
+                  searchAddonRef.current?.clearDecorations();
+                }}
+              >
+                <ArrowDownIcon />
+              </Button>
+            </Tooltip>
+            <Tooltip label="Scroll to next error">
+              <Button
+                onClick={() => {
+                  searchAddonRef.current?.findNext(
+                    "failed|exit code [1-9][0-9]*",
+                    {
+                      regex: true,
+                    }
+                  );
+                }}
+              >
+                🐛
+              </Button>
+            </Tooltip>
             <Input
               _placeholder={{ color: "rgb(203,203,203)" }}
               color="white"
               name="searchTerm"
               placeholder="Search logs"
             />
-            <Button type="submit">Search</Button>
+            <Button padding="5" colorScheme="blue" type="submit">
+              Search
+            </Button>
           </Stack>
         </form>
       </Box>

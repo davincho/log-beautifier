@@ -1,6 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@chakra-ui/icons': ^2.0.9
   '@chakra-ui/react': ^2.3.2
   '@emotion/react': ^11.10.4
   '@emotion/styled': ^11.10.4
@@ -17,8 +18,10 @@ specifiers:
   xterm: ^4.19.0
   xterm-addon-fit: ^0.5.0
   xterm-addon-search: ^0.9.0
+  xterm-addon-webgl: ^0.12.0
 
 dependencies:
+  '@chakra-ui/icons': 2.0.9_react@18.2.0
   '@chakra-ui/react': 2.3.2_cfdomuvrhacj6mh3ho5fv3qxaq
   '@emotion/react': 11.10.4_fn6mmk7tilns4p7ajkklhuudvi
   '@emotion/styled': 11.10.4_v6omebeixt23oq3ljl3rjllla4
@@ -29,6 +32,7 @@ dependencies:
   xterm: 4.19.0
   xterm-addon-fit: 0.5.0_xterm@4.19.0
   xterm-addon-search: 0.9.0_xterm@4.19.0
+  xterm-addon-webgl: 0.12.0_xterm@4.19.0
 
 devDependencies:
   '@types/node': 18.7.16
@@ -342,6 +346,16 @@ packages:
       react: 18.2.0
     dev: false
 
+  /@chakra-ui/icon/3.0.9_react@18.2.0:
+    resolution: {integrity: sha512-P2Pwm/za6m1W1oqL2kGHH6XrrymsBjqYAFwOW2lB5Q6mI1e+RYe/iMxDoPSLHMYhqdfH7vyib/ffE3Vv3a5oTA==}
+    peerDependencies:
+      '@chakra-ui/system': '>=2.0.0'
+      react: '>=18'
+    dependencies:
+      '@chakra-ui/shared-utils': 2.0.1
+      react: 18.2.0
+    dev: false
+
   /@chakra-ui/icon/3.0.9_t3ehvuuqn76q3rgsqchbz6ue7u:
     resolution: {integrity: sha512-P2Pwm/za6m1W1oqL2kGHH6XrrymsBjqYAFwOW2lB5Q6mI1e+RYe/iMxDoPSLHMYhqdfH7vyib/ffE3Vv3a5oTA==}
     peerDependencies:
@@ -350,6 +364,16 @@ packages:
     dependencies:
       '@chakra-ui/shared-utils': 2.0.1
       '@chakra-ui/system': 2.2.9_hfzxdiydbrbhhfpkwuv3jhvwmq
+      react: 18.2.0
+    dev: false
+
+  /@chakra-ui/icons/2.0.9_react@18.2.0:
+    resolution: {integrity: sha512-6xvV2rC8wATgfnRH+fC9mi0nLcgKjhHKO29lV1pGioVI0yWK0dqc//zjcyBhMMpW5ABnSfig7ujVBf3op/Syzg==}
+    peerDependencies:
+      '@chakra-ui/system': '>=2.0.0'
+      react: '>=18'
+    dependencies:
+      '@chakra-ui/icon': 3.0.9_react@18.2.0
       react: 18.2.0
     dev: false
 
@@ -3487,6 +3511,14 @@ packages:
 
   /xterm-addon-search/0.9.0_xterm@4.19.0:
     resolution: {integrity: sha512-aoolI8YuHvdGw+Qjg8g2M4kst0v86GtB7WeBm4F0jNXA005/6QbWWy9eCsvnIDLJOFI5JSSrZnD6CaOkvBQYPA==}
+    peerDependencies:
+      xterm: ^4.0.0
+    dependencies:
+      xterm: 4.19.0
+    dev: false
+
+  /xterm-addon-webgl/0.12.0_xterm@4.19.0:
+    resolution: {integrity: sha512-3P5ihdjPnxH6Wrvqjki9UD+duoVrp1fvnO/pSpXP2F1L2GwY6TDNExgj8Yg141vMCNgQbcVqmsTLYEYZxjY92A==}
     peerDependencies:
       xterm: ^4.0.0
     dependencies:
