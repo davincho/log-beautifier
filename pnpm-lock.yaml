@@ -16,6 +16,7 @@ specifiers:
   typescript: 4.8.3
   xterm: ^4.19.0
   xterm-addon-fit: ^0.5.0
+  xterm-addon-search: ^0.9.0
 
 dependencies:
   '@chakra-ui/react': 2.3.2_cfdomuvrhacj6mh3ho5fv3qxaq
@@ -27,6 +28,7 @@ dependencies:
   react-dom: 18.2.0_react@18.2.0
   xterm: 4.19.0
   xterm-addon-fit: 0.5.0_xterm@4.19.0
+  xterm-addon-search: 0.9.0_xterm@4.19.0
 
 devDependencies:
   '@types/node': 18.7.16
@@ -3477,6 +3479,14 @@ packages:
 
   /xterm-addon-fit/0.5.0_xterm@4.19.0:
     resolution: {integrity: sha512-DsS9fqhXHacEmsPxBJZvfj2la30Iz9xk+UKjhQgnYNkrUIN5CYLbw7WEfz117c7+S86S/tpHPfvNxJsF5/G8wQ==}
+    peerDependencies:
+      xterm: ^4.0.0
+    dependencies:
+      xterm: 4.19.0
+    dev: false
+
+  /xterm-addon-search/0.9.0_xterm@4.19.0:
+    resolution: {integrity: sha512-aoolI8YuHvdGw+Qjg8g2M4kst0v86GtB7WeBm4F0jNXA005/6QbWWy9eCsvnIDLJOFI5JSSrZnD6CaOkvBQYPA==}
     peerDependencies:
       xterm: ^4.0.0
     dependencies:
