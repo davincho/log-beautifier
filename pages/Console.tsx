@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { ArrowUpIcon, ArrowDownIcon } from "@chakra-ui/icons";
 import { Box, Input, Button, Stack, Tooltip } from "@chakra-ui/react";
-import { Terminal } from "xterm";
+import type { Terminal } from "xterm";
 import { SearchAddon } from "xterm-addon-search";
 
 import "xterm/css/xterm.css";
@@ -24,10 +24,11 @@ const Console = ({ output }: { output: string }) => {
       // Add logic with `term`
       if (!terminalRef.current) {
         const terminal = new Terminal({
+          allowProposedApi: true,
           scrollback: 100_000,
           minimumContrastRatio: 1,
           theme: {
-            selection: "#FFFF54",
+            selectionBackground: "#FFFF54",
             selectionForeground: "#000",
           },
         });

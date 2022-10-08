@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { Box, Grid, GridItem } from "@chakra-ui/react";
+import { Box, Grid, GridItem, Link } from "@chakra-ui/react";
 
 import { repository } from "./../package.json";
 
@@ -26,9 +26,14 @@ const Container = ({
 
       <GridItem textAlign="center" margin="1">
         Developed with ❤️ in Vienna, AT -{" "}
-        <a href={repository} rel="noreferrer" target="_blank">
+        <Link
+          color="teal.500"
+          href={repository}
+          rel="noreferrer"
+          target="_blank"
+        >
           GitHub
-        </a>
+        </Link>
       </GridItem>
     </Grid>
   );
