@@ -1,20 +1,36 @@
-import { Box } from "@chakra-ui/react";
 import * as React from "react";
+
+import { Box, Grid, GridItem } from "@chakra-ui/react";
+
+import { repository } from "./../package.json";
 
 const Container = ({
   children,
   action,
+  containerProps,
 }: {
   children: React.ReactNode;
   action: React.ReactNode;
+  containerProps?: React.ComponentProps<typeof Box>;
 }) => {
   return (
-    <Box margin="2" height="calc(100vh - 24px)" width="calc(100vw - 24px)">
-      <Box height="90%">{children}</Box>
-      <Box marginTop="16px" height="calc(10% - 16px)">
+    <Grid
+      {...containerProps}
+      gridTemplateRows="1fr minmax(10%, 50px) 30px"
+      gap={1}
+    >
+      <GridItem>{children}</GridItem>
+      <GridItem marginY="4px" minHeight="50px">
         {action}
-      </Box>
-    </Box>
+      </GridItem>
+
+      <GridItem textAlign="center" margin="1">
+        Developed with ❤️ in Vienna, AT -{" "}
+        <a href={repository} rel="noreferrer" target="_blank">
+          GitHub
+        </a>
+      </GridItem>
+    </Grid>
   );
 };
 

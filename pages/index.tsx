@@ -1,31 +1,32 @@
 import * as React from "react";
 
+import { ChakraProvider, Textarea, Button } from "@chakra-ui/react";
 import type { NextPage } from "next";
 import Head from "next/head";
 
-import Container from "./Container";
 import AnimatedView from "./AnimatedView";
 import Console from "./Console";
-
-import { ChakraProvider, Textarea, Button, Box, Text } from "@chakra-ui/react";
+import Container from "./Container";
 
 const Home: NextPage = () => {
   const [output, setOutput] = React.useState<string>("");
   const [view, setView] = React.useState<"input" | "output">("input");
-
-  const direction = view === "input" ? -1 : 1;
 
   return (
     <ChakraProvider>
       <Head>
         <title>Log Beautifier</title>
         <meta name="description" content="Log Beautifier - by davincho" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/favicon.png" />
       </Head>
-
       <AnimatedView view={view}>
         {view === "input" ? (
           <Container
+            containerProps={{
+              height: "100vh",
+              width: "100vw",
+              padding: "1",
+            }}
             action={
               <Button
                 height="100%"
@@ -53,6 +54,10 @@ const Home: NextPage = () => {
           </Container>
         ) : (
           <Container
+            containerProps={{
+              height: "100vh",
+              width: "100vw",
+            }}
             action={
               <Button
                 onClick={() => {

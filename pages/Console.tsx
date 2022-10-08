@@ -1,7 +1,7 @@
-import { Box, Input, Button, Stack, Tooltip } from "@chakra-ui/react";
-import { ArrowUpIcon, ArrowDownIcon } from "@chakra-ui/icons";
 import * as React from "react";
 
+import { ArrowUpIcon, ArrowDownIcon } from "@chakra-ui/icons";
+import { Box, Input, Button, Stack, Tooltip } from "@chakra-ui/react";
 import { Terminal } from "xterm";
 import { SearchAddon } from "xterm-addon-search";
 
@@ -20,12 +20,11 @@ const Console = ({ output }: { output: string }) => {
       const { FitAddon } = await import("xterm-addon-fit");
       const { WebglAddon } = await import("xterm-addon-webgl");
       const { SearchAddon } = await import("xterm-addon-search");
-      const term = new Terminal();
-      // Add logic with `term`
 
+      // Add logic with `term`
       if (!terminalRef.current) {
         const terminal = new Terminal({
-          scrollback: 100000,
+          scrollback: 100_000,
           minimumContrastRatio: 1,
           theme: {
             selection: "#FFFF54",

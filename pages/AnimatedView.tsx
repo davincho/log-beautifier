@@ -1,6 +1,6 @@
-import { Box } from "@chakra-ui/react";
 import * as React from "react";
 
+import { Box } from "@chakra-ui/react";
 import { AnimatePresence, motion } from "framer-motion";
 
 const variants = {
