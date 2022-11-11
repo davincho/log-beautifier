@@ -3,7 +3,7 @@
 
 Trying to make sense of console output that contains ANSI color token? We got you covered:
 
-* 🔓 Parseing happens 100% in the browser (no logs are being send over the wire)
+* 🔓 Your data is safe - parsing happens 100% in your browser (no logs are being send over the wire)
 * 🐛 Shortcut to jump to the next bug
 * 🔎 Full text search
 
