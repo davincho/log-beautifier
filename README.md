@@ -1,34 +1,18 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+# 🦄 Log Beautifier
 
-First, run the development server:
+Trying to make sense of console output that contains ANSI color token? We got you covered:
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+* 🔓 Parseing happens 100% in the browser (no logs are being send over the wire)
+* 🐛 Shortcut to jump to the next bug
+* 🔎 Full text search
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Try it out now: https://log-beautifier.vercel.app/
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+![log-beautifier](https://user-images.githubusercontent.com/2635143/201309985-ffe520dd-7e16-4f71-979e-2034af24afb9.gif)
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## Development
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+1. Install dependencies `pnpm install`
+2. Run `pnpm dev` to start the local development server
