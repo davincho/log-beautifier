@@ -3,27 +3,6 @@ import * as React from "react";
 import { Box } from "@chakra-ui/react";
 import { AnimatePresence, motion } from "framer-motion";
 
-const variants = {
-  enter: (direction: number) => {
-    return {
-      y: direction > 0 ? 1000 : -1000,
-      opacity: 0,
-    };
-  },
-  center: {
-    zIndex: 1,
-    y: 0,
-    opacity: 1,
-  },
-  exit: (direction: number) => {
-    return {
-      zIndex: 0,
-      y: direction < 0 ? 1000 : -1000,
-      opacity: 0,
-    };
-  },
-};
-
 const AnimatedView = ({
   view,
   children,
@@ -31,29 +10,14 @@ const AnimatedView = ({
   view: "input" | "output";
   children: React.ReactNode;
 }) => {
-  const direction = view === "input" ? -1 : 1;
-
   return (
-    <AnimatePresence initial={false} custom={direction}>
+    <AnimatePresence>
       <Box position="relative">
         <motion.div
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-          }}
-          custom={direction}
           key={view}
-          initial="enter"
-          animate="center"
-          exit="exit"
-          variants={variants}
-          transition={{
-            y: { type: "spring", stiffness: 300, damping: 30 },
-            opacity: { duration: 0.1 },
-          }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
         >
           {children}
         </motion.div>

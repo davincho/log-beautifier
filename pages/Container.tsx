@@ -16,7 +16,7 @@ const Container = ({
   return (
     <Grid
       {...containerProps}
-      gridTemplateRows="1fr minmax(10%, 50px) 30px"
+      gridTemplateRows="1fr minmax(10%, 50px) 40px"
       gap={1}
     >
       <GridItem>{children}</GridItem>
