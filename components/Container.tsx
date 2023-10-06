@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { Box, Grid, GridItem, Link } from "@chakra-ui/react";
 
-import { repository } from "./../package.json";
+import { repository } from "../package.json";
 
 const Container = ({
   children,

@@ -1,11 +1,15 @@
+'use client'
+
 import * as React from "react";
 
 import { ArrowUpIcon, ArrowDownIcon } from "@chakra-ui/icons";
-import { Box, Input, Button, Stack, Tooltip } from "@chakra-ui/react";
+
 import type { Terminal } from "xterm";
 import { SearchAddon } from "xterm-addon-search";
 
 import "xterm/css/xterm.css";
+import { Tooltip, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip";
+import { Button } from "@/components/ui/button";
 
 const Console = ({ output }: { output: string }) => {
   const nodeRef = React.useRef<HTMLDivElement>(null);
@@ -59,31 +63,24 @@ const Console = ({ output }: { output: string }) => {
     return () => {
       if (terminalRef.current) {
         terminalRef.current.clear();
-        terminalRef.current.dispose();
+        
         terminalRef.current = undefined;
       }
     };
   }, [output]);
 
   return (
-    <Box height="100%" position="relative">
-      <Box
-        as="div"
-        height="100%"
-        overflowX="auto"
-        overflowY="auto"
+    <div className="h-full relative">
+      <div
+        className="h-full overflow-auto"
+        
         ref={nodeRef}
       />
-      <Box
-        position="absolute"
-        right="0"
-        top="0"
-        zIndex="4"
-        borderRadius="md"
-        margin="3"
-        backgroundColor="rgba(240,240,240,0.4)"
-        padding="2"
-        backdropFilter="blur(8px)"
+      <div className="absolute right-0 top-0 z-10 rounded-md bg-white/10 backdrop-blur-md p-2 m-3"
+        
+
+        
+        
       >
         <form
           onSubmit={(event) => {
@@ -98,9 +95,11 @@ const Console = ({ output }: { output: string }) => {
             searchAddonRef.current?.findNext(searchTerm);
           }}
         >
-          <Stack direction="row">
-            <Tooltip label="Scroll to top">
+          <div className="flex flex-row gap-2">
+            <Tooltip>
+              <TooltipTrigger asChild>
               <Button
+
                 onClick={() => {
                   searchAddonRef.current?.clearDecorations();
                   terminalRef.current?.scrollToTop();
@@ -108,8 +107,13 @@ const Console = ({ output }: { output: string }) => {
               >
                 <ArrowUpIcon />
               </Button>
+              </TooltipTrigger>
+              <TooltipContent>
+              Scroll to top
+              </TooltipContent>
             </Tooltip>
-            <Tooltip label="Scroll to bottom">
+            <Tooltip>
+            <TooltipTrigger asChild>
               <Button
                 onClick={() => {
                   terminalRef.current?.scrollToBottom();
@@ -118,8 +122,13 @@ const Console = ({ output }: { output: string }) => {
               >
                 <ArrowDownIcon />
               </Button>
+              </TooltipTrigger>
+              <TooltipContent>
+              Scroll to bottom
+              </TooltipContent>
             </Tooltip>
-            <Tooltip label="Scroll to next error">
+            <Tooltip>
+              <TooltipTrigger asChild>
               <Button
                 onClick={() => {
                   searchAddonRef.current?.findNext(
@@ -132,20 +141,24 @@ const Console = ({ output }: { output: string }) => {
               >
                 🐛
               </Button>
+              </TooltipTrigger>
+              <TooltipContent>
+              Scroll to next error
+              </TooltipContent>
             </Tooltip>
-            <Input
-              _placeholder={{ color: "rgb(203,203,203)" }}
+            <input
+              className="text-white placeholder:text-gray-500 bg-transparent border p-2 rounded"
               color="white"
               name="searchTerm"
               placeholder="Search logs"
             />
-            <Button padding="5" colorScheme="blue" type="submit">
+            <Button type="submit">
               Search
             </Button>
-          </Stack>
+          </div>
         </form>
-      </Box>
-    </Box>
+      </div>
+    </div>
   );
 };
 
