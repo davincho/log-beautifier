@@ -14,17 +14,11 @@ const Container = ({
   containerProps?: React.ComponentProps<typeof Box>;
 }) => {
   return (
-    <Grid
-      {...containerProps}
-      gridTemplateRows="1fr minmax(10%, 50px) 40px"
-      gap={1}
-    >
-      <GridItem>{children}</GridItem>
-      <GridItem marginY="4px" minHeight="50px">
-        {action}
-      </GridItem>
+    <div className="grid grid-rows-[1fr_minmax(10%,_50px)_40px] gap-1 h-screen w-screen p-1">
+      <div>{children}</div>
+      <div>{action}</div>
 
-      <GridItem textAlign="center" margin="1">
+      <div className="text-center m-1">
         Developed with ❤️ in Vienna, AT -{" "}
         <Link
           color="teal.500"
@@ -34,8 +28,8 @@ const Container = ({
         >
           GitHub
         </Link>
-      </GridItem>
-    </Grid>
+      </div>
+    </div>
   );
 };
 

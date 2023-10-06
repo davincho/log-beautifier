@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import * as React from "react";
 
@@ -8,8 +8,14 @@ import type { Terminal } from "xterm";
 import { SearchAddon } from "xterm-addon-search";
 
 import "xterm/css/xterm.css";
-import { Tooltip, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip";
+import {
+  Tooltip,
+  TooltipTrigger,
+  TooltipContent,
+} from "@/components/ui/tooltip";
 import { Button } from "@/components/ui/button";
+
+import Toolbar from "./Toolbar";
 
 const Console = ({ output }: { output: string }) => {
   const nodeRef = React.useRef<HTMLDivElement>(null);
@@ -63,7 +69,7 @@ const Console = ({ output }: { output: string }) => {
     return () => {
       if (terminalRef.current) {
         terminalRef.current.clear();
-        
+
         terminalRef.current = undefined;
       }
     };
@@ -71,92 +77,26 @@ const Console = ({ output }: { output: string }) => {
 
   return (
     <div className="h-full relative">
-      <div
-        className="h-full overflow-auto"
-        
-        ref={nodeRef}
-      />
-      <div className="absolute right-0 top-0 z-10 rounded-md bg-white/10 backdrop-blur-md p-2 m-3"
-        
-
-        
-        
-      >
-        <form
-          onSubmit={(event) => {
-            event.preventDefault();
-
-            const target = event.target as typeof event.target & {
-              searchTerm: { value: string };
-            };
-
-            const searchTerm = target.searchTerm.value;
-
+      <div className="h-full overflow-auto" ref={nodeRef} />
+      <div className="absolute right-0 top-0 z-10 rounded-md bg-white/10 backdrop-blur-md p-2 m-3">
+        <Toolbar
+          onSearch={(searchTerm) => {
             searchAddonRef.current?.findNext(searchTerm);
           }}
-        >
-          <div className="flex flex-row gap-2">
-            <Tooltip>
-              <TooltipTrigger asChild>
-              <Button
-
-                onClick={() => {
-                  searchAddonRef.current?.clearDecorations();
-                  terminalRef.current?.scrollToTop();
-                }}
-              >
-                <ArrowUpIcon />
-              </Button>
-              </TooltipTrigger>
-              <TooltipContent>
-              Scroll to top
-              </TooltipContent>
-            </Tooltip>
-            <Tooltip>
-            <TooltipTrigger asChild>
-              <Button
-                onClick={() => {
-                  terminalRef.current?.scrollToBottom();
-                  searchAddonRef.current?.clearDecorations();
-                }}
-              >
-                <ArrowDownIcon />
-              </Button>
-              </TooltipTrigger>
-              <TooltipContent>
-              Scroll to bottom
-              </TooltipContent>
-            </Tooltip>
-            <Tooltip>
-              <TooltipTrigger asChild>
-              <Button
-                onClick={() => {
-                  searchAddonRef.current?.findNext(
-                    "failed|exit code [1-9][0-9]*",
-                    {
-                      regex: true,
-                    }
-                  );
-                }}
-              >
-                🐛
-              </Button>
-              </TooltipTrigger>
-              <TooltipContent>
-              Scroll to next error
-              </TooltipContent>
-            </Tooltip>
-            <input
-              className="text-white placeholder:text-gray-500 bg-transparent border p-2 rounded"
-              color="white"
-              name="searchTerm"
-              placeholder="Search logs"
-            />
-            <Button type="submit">
-              Search
-            </Button>
-          </div>
-        </form>
+          onScrollToBottom={() => {
+            terminalRef.current?.scrollToBottom();
+            searchAddonRef.current?.clearDecorations();
+          }}
+          onScrollToBug={() => {
+            searchAddonRef.current?.findNext("failed|exit code [1-9][0-9]*", {
+              regex: true,
+            });
+          }}
+          onScrollToTop={() => {
+            searchAddonRef.current?.clearDecorations();
+            terminalRef.current?.scrollToTop();
+          }}
+        />
       </div>
     </div>
   );

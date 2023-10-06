@@ -28,7 +28,7 @@ export default function Page() {
       >
         <textarea
           placeholder="Paste your log here - everything is client side rendered and we don't send any data to our server 🔒"
-          className="h-full w-full border rounded-md p-3"
+          className="h-full w-full border rounded-md p-3 font-mono"
           onChange={(event) => {
             const newCode = event.target.value;
 
