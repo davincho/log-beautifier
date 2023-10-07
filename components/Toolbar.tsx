@@ -58,7 +58,7 @@ const Toolbar = ({
       <div className="flex flex-row gap-2">
         <Tooltip>
           <TooltipTrigger asChild>
-            <Button onClick={onScrollToTop}>
+            <Button type="button" onClick={onScrollToTop}>
               <ArrowUpIcon />
             </Button>
           </TooltipTrigger>
@@ -66,7 +66,7 @@ const Toolbar = ({
         </Tooltip>
         <Tooltip>
           <TooltipTrigger asChild>
-            <Button onClick={onScrollToBottom}>
+            <Button type="button" onClick={onScrollToBottom}>
               <ArrowDownIcon />
             </Button>
           </TooltipTrigger>
@@ -74,7 +74,9 @@ const Toolbar = ({
         </Tooltip>
         <Tooltip>
           <TooltipTrigger asChild>
-            <Button onClick={onScrollToBug}>🐛</Button>
+            <Button type="button" onClick={onScrollToBug}>
+              🐛
+            </Button>
           </TooltipTrigger>
           <TooltipContent>Scroll to next error</TooltipContent>
         </Tooltip>

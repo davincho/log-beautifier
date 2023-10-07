@@ -78,9 +78,17 @@ const Console = ({ output }: { output?: string }) => {
             searchAddonRef.current?.clearDecorations();
           }}
           onScrollToBug={() => {
-            searchAddonRef.current?.findNext("failed|exit code [1-9][0-9]*", {
-              regex: true,
-            });
+            searchAddonRef.current?.findNext(
+              "fail|failed|exit code [1-9][0-9]*|error",
+              {
+                regex: true,
+                decorations: {
+                  activeMatchBackground: "#FFFF54",
+                  matchOverviewRuler: "#FFFF54",
+                  activeMatchColorOverviewRuler: "#FFFF54",
+                },
+              },
+            );
           }}
           onScrollToTop={() => {
             searchAddonRef.current?.clearDecorations();
