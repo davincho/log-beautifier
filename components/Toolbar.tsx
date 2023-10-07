@@ -16,7 +16,7 @@ const Button = React.forwardRef<
   {
     children: React.ReactNode;
   } & React.ButtonHTMLAttributes<HTMLButtonElement>
->(({ children, onClick, ...props }, ref) => {
+>(({ children, ...props }, ref) => {
   return (
     <button
       {...props}
