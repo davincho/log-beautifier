@@ -11,19 +11,24 @@ import {
   TooltipContent,
 } from "@/components/ui/tooltip";
 
-const Button: React.FC<{
-  onClick: React.DOMAttributes<HTMLButtonElement>["onClick"];
-  children: React.ReactElement;
-}> = ({ children, onClick }) => {
+const Button = React.forwardRef<
+  HTMLButtonElement,
+  {
+    children: React.ReactNode;
+  } & React.ButtonHTMLAttributes<HTMLButtonElement>
+>(({ children, onClick, ...props }, ref) => {
   return (
     <button
-      onClick={onClick}
+      {...props}
+      ref={ref}
       className="rounded bg-white min-h-[40px] min-w-[40px] p-2 text-md  text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
     >
       {children}
     </button>
   );
-};
+});
+
+Button.displayName = "ToolbarButton";
 
 const Toolbar = ({
   onScrollToBottom,
@@ -46,6 +51,8 @@ const Toolbar = ({
         };
 
         const searchTerm = target.searchTerm.value;
+
+        onSearch(searchTerm);
       }}
     >
       <div className="flex flex-row gap-2">

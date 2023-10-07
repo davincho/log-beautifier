@@ -1,37 +1,51 @@
-import * as React from 'react'
+"use client";
+
+import * as React from "react";
 
 import lzString from "lz-string";
+import { useRouter } from "next/navigation";
+import { debounce } from "throttle-debounce";
 
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+const persistToHash = debounce(
+  200,
+  (code: string, router: ReturnType<typeof useRouter>) => {
+    if (typeof window === "undefined") {
+      return;
+    }
+
+    if (code) {
+      window.location.hash = lzString.compressToEncodedURIComponent(code);
+
+      router.replace(`/#${lzString.compressToEncodedURIComponent(code)}`);
+    } else {
+      router.replace(`/`);
+    }
+  },
+);
 
 const useHashPersist = () => {
+  const [code, setCode] = React.useState(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
 
-    
+    const hash = window.location.hash;
 
-
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
-
-  const subscribe = React.useCallback(() => {
-    return () => {};
-  }, [pathname, searchParams]);
-
-  const hash = React.useSyncExternalStore(
-    subscribe,
-    () => {
-      return location.hash;
-    },
-    () => ""
-  );
-
-  const output =
-    hash.length > 1
-      ? lzString.decompressFromEncodedURIComponent(hash.substring(1))
+    return hash.length > 1
+      ? lzString.decompressFromEncodedURIComponent(hash.slice(1))
       : "";
+  });
 
-      return output;
+  const router = useRouter();
 
-}
+  return [
+    code,
+    (newCode: string) => {
+      setCode(newCode);
 
+      persistToHash(newCode, router);
+    },
+  ] as const;
+};
 
-export default useHashPersist
+export default useHashPersist;

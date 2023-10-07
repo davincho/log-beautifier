@@ -7,7 +7,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "prettier": " prettier . --write"
   },
   "dependencies": {
     "@chakra-ui/icons": "^2.1.1",
@@ -25,18 +26,20 @@
     "react-dom": "18.2.0",
     "tailwind-merge": "^1.14.0",
     "tailwindcss-animate": "^1.0.7",
+    "throttle-debounce": "^5.0.0",
     "xterm": "^5.3.0",
     "xterm-addon-fit": "^0.8.0",
     "xterm-addon-search": "^0.13.0",
     "xterm-addon-webgl": "^0.16.0"
   },
   "devDependencies": {
-    "@dvnch/eslint-config": "^3.1.1",
-    "@types/node": "20.8.2",
-    "@types/react": "18.2.24",
-    "@types/react-dom": "18.2.8",
+    "@dvnch/eslint-config": "^4.0.0",
+    "@types/node": "20.8.3",
+    "@types/react": "18.2.25",
+    "@types/react-dom": "18.2.11",
+    "@types/throttle-debounce": "^5.0.0",
     "autoprefixer": "^10.4.16",
-    "eslint": "8.50.0",
+    "eslint": "8.51.0",
     "eslint-config-next": "13.5.4",
     "postcss": "^8.4.31",
     "prettier": "^3.0.3",

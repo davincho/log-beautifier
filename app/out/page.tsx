@@ -1,24 +1,23 @@
 "use client";
 
-import Container from "../../components/Container";
-import Console from "../../components/Console";
-import useHashPersist from "../useHashPersist";
-import HashButton from "../../components/HashButton";
+import dynamic from "next/dynamic";
+
 import AnimatedView from "../../components/AnimatedView";
+import Container from "../../components/Container";
+import HashButton from "../../components/HashButton";
+import useHashPersist from "../useHashPersist";
+
+const Console = dynamic(() => import("../../components/Console"), {
+  ssr: false,
+});
 
 export default function Page() {
-  const logOutput = useHashPersist();
+  const [output] = useHashPersist();
 
   return (
     <AnimatedView>
-      <Container
-        containerProps={{
-          height: "100vh",
-          width: "100vw",
-        }}
-        action={<HashButton route="/">Back</HashButton>}
-      >
-        <Console output={logOutput} />
+      <Container action={<HashButton route="/">Back</HashButton>}>
+        <Console output={output} />
       </Container>
     </AnimatedView>
   );

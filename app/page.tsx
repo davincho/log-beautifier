@@ -1,46 +1,24 @@
 "use client";
 
-import * as React from "react";
-
-import lzString from "lz-string";
-
+import AnimatedView from "../components/AnimatedView";
 import Container from "../components/Container";
-import { useRouter } from "next/navigation";
+import HashButton from "../components/HashButton";
 
 import useHashPersist from "./useHashPersist";
-import HashButton from "../components/HashButton";
-import AnimatedView from "../components/AnimatedView";
 
 export default function Page() {
-  const router = useRouter();
-
-  const code = useHashPersist();
+  const [code, setCode] = useHashPersist();
 
   return (
     <AnimatedView>
-      <Container
-        containerProps={{
-          height: "100vh",
-          width: "100vw",
-          padding: "1",
-        }}
-        action={<HashButton route="/out">Convert ✌🏼</HashButton>}
-      >
+      <Container action={<HashButton route="/out">Convert ✌🏼</HashButton>}>
         <textarea
           placeholder="Paste your log here - everything is client side rendered and we don't send any data to our server 🔒"
-          className="h-full w-full border rounded-md p-3 font-mono"
+          className="h-full w-full border rounded-md p-2 font-mono"
           onChange={(event) => {
             const newCode = event.target.value;
 
-            if (!newCode) {
-              router.replace(`/`);
-            } else {
-              location.hash = lzString.compressToEncodedURIComponent(newCode);
-
-              router.replace(
-                `/#${lzString.compressToEncodedURIComponent(newCode)}`
-              );
-            }
+            setCode(newCode);
           }}
           value={code}
         />
