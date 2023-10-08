@@ -4,10 +4,10 @@ import * as React from "react";
 
 import lzString from "lz-string";
 import { useRouter } from "next/navigation";
-import { debounce } from "throttle-debounce";
+import { throttle } from "throttle-debounce";
 
-const persistToHash = debounce(
-  100,
+const persistToHash = throttle(
+  500,
   (code: string, router: ReturnType<typeof useRouter>) => {
     if (typeof window === "undefined") {
       return;
