@@ -20,7 +20,7 @@ const persistToHash = debounce(
     } else {
       router.replace(`/`);
     }
-  }
+  },
 );
 
 const useHashPersist = () => {

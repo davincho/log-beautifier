@@ -11,7 +11,6 @@ export default function HashButton({
 
   return (
     <button
-    
       className="px-6 py-4 w-full text-md font-semibold rounded bg-indigo-50  text-indigo-600 shadow-sm hover:bg-indigo-100"
       onClick={() => {
         router.push(`${route}${location.hash}`);
