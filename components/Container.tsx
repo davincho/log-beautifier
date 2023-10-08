@@ -17,7 +17,7 @@ const Container = ({
       <div className="text-center m-1">
         Developed with ❤️ in Vienna, AT -{" "}
         <a
-          className="text-teal-500"
+          className="text-indigo-600 font-medium"
           href={repository}
           rel="noreferrer"
           target="_blank"

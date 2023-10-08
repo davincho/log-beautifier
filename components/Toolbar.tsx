@@ -21,7 +21,7 @@ const Button = React.forwardRef<
     <button
       {...props}
       ref={ref}
-      className="rounded bg-white min-h-[40px] min-w-[40px] p-2 text-md  text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+      className="rounded bg-white min-h-[40px] min-w-[40px] p-2 text-md text-indigo-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-indigo-200"
     >
       {children}
     </button>

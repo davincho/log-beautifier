@@ -14,9 +14,7 @@ const persistToHash = debounce(
     }
 
     if (code) {
-      router.replace(
-        `/#${lzString.compressToEncodedURIComponent(JSON.stringify(code))}`,
-      );
+      router.replace(`/#${lzString.compressToEncodedURIComponent(code)}`);
     } else {
       router.replace(`/`);
     }
@@ -32,7 +30,7 @@ const useHashPersist = () => {
     const hash = window.location.hash;
 
     return hash.length > 1
-      ? JSON.parse(lzString.decompressFromEncodedURIComponent(hash.slice(1)))
+      ? lzString.decompressFromEncodedURIComponent(hash.slice(1))
       : "";
   });
 
