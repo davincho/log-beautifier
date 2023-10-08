@@ -58,7 +58,10 @@ const Console = ({ output }: { output?: string }) => {
       searchAddonRef.current = searchAddon;
 
       if (output) {
-        const prepOutput = output.replaceAll("\n", "\n\r");
+        const prepOutput = output
+          .replaceAll("\\n", "\n\r")
+          .replaceAll("\\u001b", "\u001B");
+
         terminalRef.current?.write(prepOutput);
       }
     },
