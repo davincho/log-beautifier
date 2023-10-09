@@ -59,7 +59,8 @@ const Console = ({ output }: { output?: string }) => {
 
       if (output) {
         const prepOutput = output
-          // .replaceAll("\\n", "\n\r")
+          .replaceAll("\n", "\n\r")
+          .replaceAll("\\n", "\n\r")
           .replaceAll("\\u001b", "\u001B");
 
         terminalRef.current?.write(prepOutput);
