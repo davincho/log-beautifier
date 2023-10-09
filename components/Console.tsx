@@ -61,7 +61,9 @@ const Console = ({ output }: { output?: string }) => {
         const prepOutput = output
           .replaceAll("\n", "\n\r")
           .replaceAll("\\n", "\n\r")
-          .replaceAll("\\u001b", "\u001B");
+          .replaceAll("\\u001b[31m", (match) => `🐛 ${match}`)
+          .replaceAll("\\u001b", "\u001B")
+          .replaceAll(/exit code [1-9]\d*/g, (match) => `🐛 ${match}`);
 
         terminalRef.current?.write(prepOutput);
       }
@@ -83,7 +85,7 @@ const Console = ({ output }: { output?: string }) => {
           }}
           onScrollToBug={() => {
             searchAddonRef.current?.findNext(
-              "failed|exit code [1-9][0-9]*|error",
+              "🐛.*(failed|error|exit code [1-9][0-9]*)",
               {
                 regex: true,
                 decorations: {
