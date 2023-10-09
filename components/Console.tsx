@@ -59,6 +59,7 @@ const Console = ({ output }: { output?: string }) => {
 
       if (output) {
         const prepOutput = output
+          .replaceAll("\n", "\n\r")
           .replaceAll("\\n", "\n\r")
           .replaceAll("\\u001b", "\u001B");
 
@@ -82,7 +83,7 @@ const Console = ({ output }: { output?: string }) => {
           }}
           onScrollToBug={() => {
             searchAddonRef.current?.findNext(
-              "fail|failed|exit code [1-9][0-9]*|error",
+              "failed|exit code [1-9][0-9]*|error",
               {
                 regex: true,
                 decorations: {
