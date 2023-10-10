@@ -6,7 +6,10 @@ export const encode = (code: string) => {
   return lzString.compressToEncodedURIComponent(JSON.stringify(code));
 };
 export const decode = (hash: string) => {
-  return lzString.decompressFromEncodedURIComponent(hash).slice(1, -1);
+  return lzString
+    .decompressFromEncodedURIComponent(hash)
+    .slice(1, -1)
+    .replaceAll("\\\\", "\\");
 };
 
 export const cleanupCode = (code: string) => {

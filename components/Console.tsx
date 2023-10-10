@@ -10,6 +10,7 @@ import { WebglAddon } from "xterm-addon-webgl";
 
 import "xterm/css/xterm.css";
 
+import { cleanupCode } from "./../app/encodeUtil";
 import Toolbar from "./Toolbar";
 
 const Console = ({ output }: { output?: string }) => {
@@ -58,12 +59,7 @@ const Console = ({ output }: { output?: string }) => {
       searchAddonRef.current = searchAddon;
 
       if (output) {
-        const prepOutput = output
-          .replaceAll("\n", "\n\r")
-          .replaceAll("\\n", "\n\r")
-          .replaceAll("\\u001b[31m", (match) => `🐛 ${match}`)
-          .replaceAll("\\u001b", "\u001B")
-          .replaceAll(/exit code [1-9]\d*/g, (match) => `🐛 ${match}`);
+        const prepOutput = cleanupCode(output);
 
         terminalRef.current?.write(prepOutput);
       }

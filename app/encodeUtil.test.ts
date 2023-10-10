@@ -24,6 +24,8 @@ test("it should put 🐛 marks in places we consider to be an error", () => {
   );
 
   expect(cleanupCode("exit code 10")).toEqual("🐛 exit code 10");
+
+  expect(decode(encode("sdf sdf sd fsd wert"))).toEqual("sdf sdf sd fsd wert");
 });
 
 test("it should clean code so it is ready for xterm", () => {
