@@ -2,9 +2,10 @@
 
 import * as React from "react";
 
-import lzString from "lz-string";
 import { useRouter } from "next/navigation";
 import { throttle } from "throttle-debounce";
+
+import { decode, encode } from "./encodeUtil";
 
 const persistToHash = throttle(
   500,
@@ -14,7 +15,7 @@ const persistToHash = throttle(
     }
 
     if (code) {
-      router.replace(`/#${lzString.compressToEncodedURIComponent(code)}`);
+      router.replace(`/#${encode(code)}`);
     } else {
       router.replace(`/`);
     }
@@ -29,9 +30,7 @@ const useHashPersist = () => {
 
     const hash = window.location.hash;
 
-    return hash.length > 1
-      ? lzString.decompressFromEncodedURIComponent(hash.slice(1))
-      : "";
+    return hash.length > 1 ? decode(hash.slice(1)) : "";
   });
 
   const router = useRouter();
