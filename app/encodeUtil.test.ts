@@ -16,14 +16,14 @@ test("it should handle escaped values correclty", () => {
   expect(decode(encode(from))).toEqual(to);
 });
 
-test("it should put 🐛 marks in places we consider to be an error", () => {
+test("it should put zero-width whitespace (\u200B) markers in places we consider to be an error", () => {
   const source = "\u001B[31m1 of 53 failed (2%)\u001B";
 
   expect(cleanupCode(decode(encode(source)))).toEqual(
-    "🐛 \u001B[31m1 of 53 failed (2%)\u001B",
+    "\u200B\u001B[31m1 of 53 failed (2%)\u001B",
   );
 
-  expect(cleanupCode("exit code 10")).toEqual("🐛 exit code 10");
+  expect(cleanupCode("exit code 10")).toEqual("\u200Bexit code 10");
 
   expect(decode(encode("sdf sdf sd fsd wert"))).toEqual("sdf sdf sd fsd wert");
 });

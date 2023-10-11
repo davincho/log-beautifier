@@ -16,7 +16,7 @@ export const cleanupCode = (code: string) => {
   return code
     .replaceAll("\n", "\n\r")
     .replaceAll("\\n", "\n\r")
-    .replaceAll("\\u001b[31m", (match) => `🐛 ${match}`)
+    .replaceAll("\\u001b[31m", (match) => `\u200B${match}`)
     .replaceAll("\\u001b", "\u001B")
-    .replaceAll(/exit code [1-9]\d*/g, (match) => `🐛 ${match}`);
+    .replaceAll(/exit code [1-9]\d*/g, (match) => `\u200B${match}`);
 };

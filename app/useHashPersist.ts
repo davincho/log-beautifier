@@ -19,7 +19,7 @@ const persistToHash = throttle(
     } else {
       router.replace(`/`);
     }
-  },
+  }
 );
 
 const useHashPersist = () => {

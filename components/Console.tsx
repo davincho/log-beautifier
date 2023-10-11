@@ -81,7 +81,7 @@ const Console = ({ output }: { output?: string }) => {
           }}
           onScrollToBug={() => {
             searchAddonRef.current?.findNext(
-              "🐛.*(failed|error|exit code [1-9][0-9]*)",
+              "\u200B.*(failed|error|exit code [1-9][0-9]*)",
               {
                 regex: true,
                 decorations: {
